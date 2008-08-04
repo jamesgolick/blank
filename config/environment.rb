@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "expectations"
   config.gem "resource_controller"
+  config.gem "active_presenter"
   
   config.gem "jcnetdev-shoulda",         :lib => "shoulda",      :source => "http://gems.github.com"
   config.gem "giraffesoft-attribute_fu", :lib => "attribute_fu", :source => "http://gems.github.com"
@@ -38,7 +39,7 @@ Rails::Initializer.run do |config|
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  config.load_paths += %W( #{RAILS_ROOT}/presenters )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
