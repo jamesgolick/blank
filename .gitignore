@@ -1,1 +1,2 @@
 config/initializers/site_keys.rb
+*.sqlite3
