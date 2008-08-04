@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "expectations"
   config.gem "jcnetdev-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+  config.gem "resource_controller"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
