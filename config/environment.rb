@@ -28,10 +28,9 @@ Rails::Initializer.run do |config|
   config.gem "expectations"
   config.gem "resource_controller"
   
-  config.with_options(:source => "http://gems.github.com") do |github|
-    github.gem "jcnetdev-shoulda",         :lib => "shoulda"
-    github.gem "giraffesoft-attribute_fu", :lib => "attribute_fu"
-  end
+  config.gem "jcnetdev-shoulda",         :lib => "shoulda",      :source => "http://gems.github.com"
+  config.gem "giraffesoft-attribute_fu", :lib => "attribute_fu", :source => "http://gems.github.com"
+
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
