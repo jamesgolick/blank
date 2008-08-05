@@ -5,12 +5,6 @@ require 'people_controller'
 class PeopleController; def rescue_action(e) raise e end; end
 
 class PeopleControllerTest < Test::Unit::TestCase
-  # TODO: Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead
-  # Then, you can remove it from this and the units test.
-  include AuthenticatedTestHelper
-
-  fixtures :people
-
   def setup
     @controller = PeopleController.new
     @request    = ActionController::TestRequest.new

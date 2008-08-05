@@ -1,6 +1,10 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PersonTest < Test::Unit::TestCase
+  def setup
+    @person = people(:james)
+  end
+  
   def test_should_create_person
     assert_difference 'Person.count' do
       person = create_person
@@ -37,56 +41,56 @@ class PersonTest < Test::Unit::TestCase
   end
 
   def test_should_reset_password
-    people(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    assert_equal people(:quentin), Person.authenticate('quentin', 'new password')
+    people(:james).update_attributes(:password => 'new password', :password_confirmation => 'new password')
+    assert_equal people(:james), Person.authenticate('james', 'new password')
   end
 
   def test_should_not_rehash_password
-    people(:quentin).update_attributes(:login => 'quentin2')
-    assert_equal people(:quentin), Person.authenticate('quentin2', 'monkey')
+    people(:james).update_attributes(:login => 'james2')
+    assert_equal people(:james), Person.authenticate('james2', 'monkey')
   end
 
   def test_should_authenticate_person
-    assert_equal people(:quentin), Person.authenticate('quentin', 'monkey')
+    assert_equal people(:james), Person.authenticate('james', 'monkey')
   end
 
   def test_should_set_remember_token
-    people(:quentin).remember_me
-    assert_not_nil people(:quentin).remember_token
-    assert_not_nil people(:quentin).remember_token_expires_at
+    people(:james).remember_me
+    assert_not_nil people(:james).remember_token
+    assert_not_nil people(:james).remember_token_expires_at
   end
 
   def test_should_unset_remember_token
-    people(:quentin).remember_me
-    assert_not_nil people(:quentin).remember_token
-    people(:quentin).forget_me
-    assert_nil people(:quentin).remember_token
+    people(:james).remember_me
+    assert_not_nil people(:james).remember_token
+    people(:james).forget_me
+    assert_nil people(:james).remember_token
   end
 
   def test_should_remember_me_for_one_week
     before = 1.week.from_now.utc
-    people(:quentin).remember_me_for 1.week
+    people(:james).remember_me_for 1.week
     after = 1.week.from_now.utc
-    assert_not_nil people(:quentin).remember_token
-    assert_not_nil people(:quentin).remember_token_expires_at
-    assert people(:quentin).remember_token_expires_at.between?(before, after)
+    assert_not_nil people(:james).remember_token
+    assert_not_nil people(:james).remember_token_expires_at
+    assert people(:james).remember_token_expires_at.between?(before, after)
   end
 
   def test_should_remember_me_until_one_week
     time = 1.week.from_now.utc
-    people(:quentin).remember_me_until time
-    assert_not_nil people(:quentin).remember_token
-    assert_not_nil people(:quentin).remember_token_expires_at
-    assert_equal people(:quentin).remember_token_expires_at, time
+    people(:james).remember_me_until time
+    assert_not_nil people(:james).remember_token
+    assert_not_nil people(:james).remember_token_expires_at
+    assert_equal people(:james).remember_token_expires_at, time
   end
 
   def test_should_remember_me_default_two_weeks
     before = 2.weeks.from_now.utc
-    people(:quentin).remember_me
+    people(:james).remember_me
     after = 2.weeks.from_now.utc
-    assert_not_nil people(:quentin).remember_token
-    assert_not_nil people(:quentin).remember_token_expires_at
-    assert people(:quentin).remember_token_expires_at.between?(before, after)
+    assert_not_nil people(:james).remember_token
+    assert_not_nil people(:james).remember_token_expires_at
+    assert people(:james).remember_token_expires_at.between?(before, after)
   end
 
 protected
