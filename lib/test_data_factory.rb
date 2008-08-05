@@ -1,8 +1,14 @@
+require 'metaid'
+
 module TestDataFactory
   def data_factory(type, data)
     klass = type.to_s.classify.constantize
 
     define_method(:"hash_for_#{type}") do |*args|
+      data.merge(args.extract_options!)
+    end
+    
+    meta_def(:"hash_for_#{type}") do |*args|
       data.merge(args.extract_options!)
     end
 
