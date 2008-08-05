@@ -10,7 +10,7 @@ class Test::Unit::TestCase
   include AuthenticatedTestHelper
   extend  TestDataFactory
   
-  data_factory :person, :login => 'gob', :email => 'gob@giraffesoft.ca', :password => 'illusions', :password_confirmation => 'illusions'
+  data_factory :person, :email => 'gob@giraffesoft.ca', :password => 'illusions', :password_confirmation => 'illusions'
   
   protected
     def current_user

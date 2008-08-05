@@ -15,20 +15,20 @@ class PersonTest < Test::Unit::TestCase
     @person = people(:james)
   end
   
-  should_require_attributes :login, :password, :password_confirmation, :email
+  should_require_attributes :password, :password_confirmation, :email
 
   should "reset password" do
     people(:james).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    assert_equal people(:james), Person.authenticate('james', 'new password')
+    assert_equal people(:james), Person.authenticate('james@giraffesoft.ca', 'new password')
   end
 
   should "not rehash password when it's not updated" do
-    people(:james).update_attributes(:login => 'james2')
-    assert_equal people(:james), Person.authenticate('james2', 'monkey')
+    people(:james).update_attributes(:email => 'jamesgolick@gmail.com')
+    assert_equal people(:james), Person.authenticate('jamesgolick@gmail.com', 'monkey')
   end
 
   should "authenticate person with correct username and password" do
-    assert_equal people(:james), Person.authenticate('james', 'monkey')
+    assert_equal people(:james), Person.authenticate('james@giraffesoft.ca', 'monkey')
   end
 
   context "Remember me" do

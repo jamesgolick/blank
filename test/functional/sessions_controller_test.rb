@@ -23,7 +23,7 @@ class SessionsControllerTest < Test::Unit::TestCase
   
   context "on POST to :create" do
     setup do
-      post :create, :login => 'james', :password => 'monkey', :remember_me => "0"
+      post :create, :email => 'james@giraffesoft.ca', :password => 'monkey', :remember_me => "0"
     end
     
     should_login
@@ -35,7 +35,7 @@ class SessionsControllerTest < Test::Unit::TestCase
   
   context "on POST to :create with remember_me" do
     setup do
-      post :create, :login => 'james', :password => 'monkey', :remember_me => "1"
+      post :create, :email => 'james@giraffesoft.ca', :password => 'monkey', :remember_me => "1"
     end
     
     should_login
@@ -47,7 +47,7 @@ class SessionsControllerTest < Test::Unit::TestCase
   
   context "on POST to create with invalid credentials" do
     setup do
-      post :create, :login => 'whatever', :password => 'nothign'
+      post :create, :email => 'whatever', :password => 'nothign'
     end
 
     should_respond_with :success
