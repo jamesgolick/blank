@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_back_or_default('/')
     else
       note_failed_signin
-      @login       = params[:login]
+      @email       = params[:email]
       @remember_me = params[:remember_me]
       render :action => 'new'
     end
