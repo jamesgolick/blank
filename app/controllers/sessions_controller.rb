@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       handle_remember_cookie! new_cookie_flag
       
       flash[:notice] = "Logged in successfully"
-      redirect_back_or_default('/')
+      redirect_back_or_default root_url
     else
       note_failed_signin
       @email       = params[:email]
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   def destroy
     logout_killing_session!
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default('/')
+    redirect_back_or_default root_url
   end
 
 protected

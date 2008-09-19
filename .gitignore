@@ -1,2 +1,6 @@
 config/initializers/site_keys.rb
 *.sqlite3
+log/*.log
+tmp/**/*
+.DS_Store
+doc/**/*
