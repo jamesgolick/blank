@@ -76,4 +76,20 @@ class PersonTest < Test::Unit::TestCase
       assert_equal people(:james).remember_token_expires_at, @time
     end
   end
+  
+  context "Creating a password reset code" do
+    setup do
+      @before = 1.week.from_now.utc
+      people(:james).create_password_reset_code
+      @after  = 1.week.from_now.utc
+    end
+
+    should "create a password reset code for that user" do
+      assert_not_nil people(:james).password_reset_code
+    end
+    
+    should "set an expiry for the code of 1 week" do
+      assert people(:james).password_reset_code_expires.between?(@before, @after)
+    end
+  end
 end

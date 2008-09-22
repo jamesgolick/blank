@@ -19,4 +19,10 @@ class Person < ActiveRecord::Base
     u = find_by_email(email) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
+  
+  def create_password_reset_code
+    self[:password_reset_code]         = self.class.make_token
+    self[:password_reset_code_expires] = 1.week.from_now
+    save(false)
+  end
 end
