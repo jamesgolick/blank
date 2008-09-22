@@ -1,8 +1,9 @@
 class AccountsController < ResourceController::Singleton
   before_filter :login_required
-
-  model_name  :person
-  object_name :person
+  
+  actions       :edit, :update
+  model_name    :person
+  object_name   :person
   
   protected
     def object
