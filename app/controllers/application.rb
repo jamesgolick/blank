@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
 
   helper :all
+  before_filter :configure_mailers
   
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
@@ -11,4 +12,9 @@ class ApplicationController < ActionController::Base
   def home
     render :text => "Welcome! (in application.rb / home)"
   end
+  
+  protected
+    def configure_mailers
+      PasswordResetMailer.configure(request)
+    end
 end
