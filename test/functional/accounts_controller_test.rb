@@ -25,6 +25,11 @@ class AccountsControllerTest < ActionController::TestCase
       should "login as the user who owns the code" do
         assert_equal people(:james), current_person
       end
+      
+      should "clear the password reset code" do
+        assert_nil people(:james).reload.password_reset_code
+      end
+      
       should_respond_with :success
       should_render_template :edit
     end

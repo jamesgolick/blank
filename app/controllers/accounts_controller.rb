@@ -14,6 +14,7 @@ class AccountsController < ResourceController::Singleton
       p = Person.find_by_valid_password_reset_code(params[:password_reset_code])
       
       unless p.nil?
+        p.expire_password_reset_code
         self.current_person = p
         flash[:notice]      = "You have been logged in. Please reset your password."
       end
