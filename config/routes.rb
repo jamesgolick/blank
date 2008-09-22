@@ -10,6 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password', :controller => 'password_resets', :action => 'new',    :conditions => {:method => :get}
   map.reset_password '/reset_password', :controller => 'password_resets', :action => 'create', :conditions => {:method => :post}
   
+  map.connect '/account', :controller => 'accounts', :action => 'edit'
+  
   map.resources :people
-  map.resource  :session
+  map.resource  :session, :account
 end
