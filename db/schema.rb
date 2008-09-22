@@ -9,17 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080805211332) do
+ActiveRecord::Schema.define(:version => 20080922172907) do
 
   create_table "people", :force => true do |t|
-    t.string   "name",                      :limit => 100, :default => ""
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+    t.string   "name",                        :limit => 100, :default => ""
+    t.string   "email",                       :limit => 100
+    t.string   "crypted_password",            :limit => 40
+    t.string   "salt",                        :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_token",            :limit => 40
+    t.string   "remember_token",              :limit => 40
     t.datetime "remember_token_expires_at"
+    t.string   "password_reset_code"
+    t.datetime "password_reset_code_expires"
   end
 
 end
