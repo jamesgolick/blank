@@ -31,6 +31,8 @@ class Person < ActiveRecord::Base
     self[:password_reset_code]         = self.class.make_token
     self[:password_reset_code_expires] = 1.week.from_now
     save(false)
+    
+    PasswordResetMailer.deliver_password_reset(self)
   end
   
   def expire_password_reset_code

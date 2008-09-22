@@ -1,10 +1,6 @@
 require File.dirname(__FILE__)+'/../test_helper'
 
 class PasswordResetMailerTest < ActionMailer::TestCase
-  def setup
-    ActionMailer::Base.default_url_options[:host] = 'test.blankapp.com'
-  end
-  
   context "The password reset mailer" do
     setup do
       people(:james).create_password_reset_code

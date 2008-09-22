@@ -103,6 +103,11 @@ class PersonTest < Test::Unit::TestCase
     should "set an expiry for the code of 1 week" do
       assert people(:james).password_reset_code_expires.between?(@before, @after)
     end
+    
+    should "send a password reset email" do
+      PasswordResetMailer.expects(:deliver_password_reset).with(people(:james))
+      people(:james).create_password_reset_code
+    end
   end
   
   context "Finding a person by password reset code" do

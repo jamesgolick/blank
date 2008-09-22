@@ -6,7 +6,8 @@ class Test::Unit::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
   fixtures :all
-  
+  setup    :set_mailer_host
+
   include AuthenticatedTestHelper
   extend  TestDataFactory
   
@@ -15,5 +16,9 @@ class Test::Unit::TestCase
   protected
     def current_person
       Person.find_by_id(session[:person_id])
+    end
+    
+    def set_mailer_host
+      ActionMailer::Base.default_url_options[:host] = 'test.blankapp.com'
     end
 end
