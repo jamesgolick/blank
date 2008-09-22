@@ -118,6 +118,20 @@ class PersonTest < Test::Unit::TestCase
       people(:james).update_attribute :password_reset_code_expires, 1.week.ago
       assert_nil Person.find_by_valid_password_reset_code(people(:james).password_reset_code)
     end
+    
+    should "not explode if there's no user by that code" do
+      assert_nothing_raised {
+        Person.find_by_valid_password_reset_code('asdf')
+      }
+    end
+    
+    should "not explode if there's a code but no date" do
+      people(:james).update_attribute :password_reset_code_expires, nil
+
+      assert_nothing_raised {
+        Person.find_by_valid_password_reset_code(people(:james).password_reset_code)
+      }
+    end
   end
   
   context "Expiring a password reset code" do
