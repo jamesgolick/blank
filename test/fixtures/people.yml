@@ -1,23 +1,23 @@
 james:
   email:                     james@giraffesoft.ca
-  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
-  crypted_password:          ed342d53a05cbb280aba6d78930160fc55a4f0b8 # 'monkey'
+  salt:                      salt
+  crypted_password:          <%= Person.password_digest('monkey', 'salt') %>
   created_at:                <%= 5.days.ago.to_s :db  %>
   remember_token_expires_at: <%= 1.days.from_now.to_s %>
   remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
 
 mat:
   email:                     mat@giraffesoft.ca
-  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
-  crypted_password:          ed342d53a05cbb280aba6d78930160fc55a4f0b8 # 'monkey'
+  salt:                      salt
+  crypted_password:          <%= Person.password_digest('monkey', 'salt') %>
   created_at:                <%= 5.days.ago.to_s :db  %>
   remember_token_expires_at: <%= 1.days.from_now.to_s %>
   remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
 
 old_password_holder:
   email:                     salty_dog@example.com
-  salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  salt:                      salt
+  crypted_password:          <%= Person.password_digest('test', 'salt') %>
   created_at:                <%= 1.days.ago.to_s :db %>
 
 
