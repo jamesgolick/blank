@@ -15,7 +15,15 @@ class PersonTest < Test::Unit::TestCase
     @person = people(:james)
   end
   
-  should_require_attributes :password, :password_confirmation, :email
+  should_require_attributes :email
+  
+  context "With a new person" do
+    setup do
+      @person = Person.new
+    end
+
+    should_require_attributes :password, :password_confirmation
+  end
 
   should "reset password" do
     people(:james).update_attributes(:password => 'new password', :password_confirmation => 'new password')
