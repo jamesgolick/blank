@@ -96,6 +96,10 @@ class PersonTest < Test::Unit::TestCase
       assert_not_nil people(:james).password_reset_code
     end
     
+    should "create an expiry code for that user" do
+      assert_not_nil people(:james).password_reset_code_expires
+    end
+    
     should "set an expiry for the code of 1 week" do
       assert people(:james).password_reset_code_expires.between?(@before, @after)
     end
