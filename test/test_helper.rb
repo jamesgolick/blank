@@ -14,6 +14,6 @@ class Test::Unit::TestCase
   
   protected
     def current_person
-      Person.find(session[:person_id])
+      Person.find_by_id(session[:person_id])
     end
 end

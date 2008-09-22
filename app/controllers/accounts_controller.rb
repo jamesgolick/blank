@@ -1,5 +1,5 @@
 class AccountsController < ResourceController::Singleton
-  before_filter :login_required
+  before_filter :login_from_password_reset_code, :login_required
   
   actions       :edit, :update
   model_name    :person
@@ -8,5 +8,14 @@ class AccountsController < ResourceController::Singleton
   protected
     def object
       @object ||= current_person
+    end
+    
+    def login_from_password_reset_code
+      p = Person.find_by_valid_password_reset_code(params[:password_reset_code])
+      
+      unless p.nil?
+        self.current_person = p
+        flash[:notice]      = "You have been logged in. Please reset your password."
+      end
     end
 end

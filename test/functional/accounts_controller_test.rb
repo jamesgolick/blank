@@ -15,6 +15,20 @@ class AccountsControllerTest < ActionController::TestCase
   end
   
   not_logged_in do
+    context "With valid password reset code" do
+      setup do
+        people(:james).create_password_reset_code
+        get :edit, :password_reset_code => people(:james).password_reset_code
+      end
+
+      should_set_the_flash_to(/reset your password/i)
+      should "login as the user who owns the code" do
+        assert_equal people(:james), current_person
+      end
+      should_respond_with :success
+      should_render_template :edit
+    end
+    
     context "on GET to :edit" do
       setup do
         get :edit
