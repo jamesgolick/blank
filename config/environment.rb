@@ -29,8 +29,8 @@ Rails::Initializer.run do |config|
   config.gem "resource_controller"
   config.gem "active_presenter"
   
-  config.gem "jcnetdev-shoulda",         :lib => "shoulda",      :source => "http://gems.github.com"
-  config.gem "giraffesoft-attribute_fu", :lib => "attribute_fu", :source => "http://gems.github.com"
+  config.gem "thoughtbot-shoulda",       :lib => "shoulda/rails", :source => "http://gems.github.com"
+  config.gem "giraffesoft-attribute_fu", :lib => "attribute_fu",  :source => "http://gems.github.com"
 
 
   # Only load the plugins named here, in the order given. By default, all plugins 
