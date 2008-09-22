@@ -7,7 +7,7 @@ class SessionsController; def rescue_action(e) raise e end; end
 class SessionsControllerTest < Test::Unit::TestCase
   def self.should_login
     should "log the user in" do
-      assert_equal people(:james), current_user
+      assert_equal people(:james), current_person
     end
     
     should "redirect" do

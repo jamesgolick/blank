@@ -13,7 +13,7 @@ class Test::Unit::TestCase
   data_factory :person, :email => 'gob@giraffesoft.ca', :password => 'illusions', :password_confirmation => 'illusions'
   
   protected
-    def current_user
+    def current_person
       Person.find(session[:person_id])
     end
 end
