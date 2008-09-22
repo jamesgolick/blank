@@ -25,9 +25,10 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem 'ruby-openid', :lib => 'openid'
+  config.gem "ruby-openid", :lib => "openid"
   config.gem "resource_controller"
   config.gem "active_presenter"
+  config.gem "andand"
   
   config.gem "thoughtbot-shoulda",       :lib => "shoulda/rails", :source => "http://gems.github.com"
   config.gem "giraffesoft-attribute_fu", :lib => "attribute_fu",  :source => "http://gems.github.com"

@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+      Object#andand
+  </title>
+  <script src="javascripts/rounded_corners_lite.inc.js" type="text/javascript"></script>
+<style>
+
+</style>
+  <script type="text/javascript">
+    window.onload = function() {
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+      var versionBox = new curvyCorners(settings, document.getElementById("version"));
+      versionBox.applyCornersToAll();
+    }
+  </script>
+</head>
+<body>
+<div id="main">
+
+    <h1>Object#andand</h1>
+    <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/andand"; return false'>
+      <p>Get Version</p>
+      <a href="http://rubyforge.org/projects/andand" class="numbers">1.2.0</a>
+    </div>
+    <h1>&#x2192; &#8216;andand&#8217;</h1>
+
+
+	<h2>What</h2>
+
+
+	<p><em>Object#andand</em> lets us write:</p>
+
+
+<pre>
+@phone = Location.find(:first, ...elided... ).andand.phone
+</pre>And get a <em>guarded method invocation</em> or <em>safe navigation method</em>. This snippet performs a <code>.find</code> on the Location class, then sends <code>.phone</code> to the result <em>if the result is not nil</em>. If the result is nil, then the expression returns nil without throwing a NoMethodError.
+
+	<p>We also get an enhanced Object#tap method.</p>
+
+
+	<h2>Installing</h2>
+
+
+	<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">andand</span></pre></p>
+
+
+	<h2>The basics</h2>
+
+
+	<h3>Object#andand</h3>
+
+
+	<p>Ruby programmers are familiar with the two <em>guarded assignment</em> operators <code>&#38;&#38;=</code> and <code>||=</code>. The typical use for them is when you have a variable that might be nil. For example:</p>
+
+
+<pre>
+first_name &#38;&#38;= @first_name.trim
+@phone ||= '612-777-9311'
+</pre>You are trimming the first name provided it isn’t nil, and you are assigning ‘612-777-9311’ to the phone if it <em>is</em> nil (or false, but that isn’t important right now). The other day we were discussing the guards and we agreed that we wished there was a <em>guarded method invocation</em> operator. Here’s an example of when you would use it:
+
+<pre>
+@phone = Location.find(:first, ...elided... )&#38;&#38;.phone
+</pre>Meaning, search the location table for the first record matching some criteria, and if you find a location, get its phone. If you don’t, get nil. (Groovy provides this exact functionality, although Groovy uses <code>?.</code> instead of <code>&#38;&#38;.</code>) However, <code>&#38;&#38;.</code> won’t work because <code>&#38;&#38;.</code> is not a real Ruby operator.
+
+	<p>Object#andand let&rsquo;s us write:</p>
+
+
+<pre>
+@phone = Location.find(:first, ...elided... ).andand.phone
+</pre>And get the same effect as:
+
+<pre>
+@phone = -&gt;(loc){ loc &#38;&#38; loc.phone }.call(Location.find(:first, ...elided... ))
+</pre>Note that because you accept any method using Ruby’s method invocation syntax, you can accept methods with parameters and/or blocks:
+
+<pre>
+list_of_lists.detect { ...elided... }.andand.inject(42) { ...elided ... }
+</pre>Object#andand emphasizes syntactic regularity: the goal was to make an <code>&#38;&#38;.</code> operation that worked like <code>&#38;&#38;=</code>. <code>&#38;&#38;=</code> looks just like normal assignment, you can use any expression on the <span class="caps">RHS</span>, only the semantics are different. The andand method also works just like a normal method invocation, only the semantics are modified.
+
+	<h3>Enhanced Object#tap</h3>
+
+
+	<p>Ruby 1.9 introduces <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions">Object#tap</a>. This library implements Object#tap for Ruby 1.8 <strong>and</strong> enhances it. As in Ruby 1.9, you can call <code>.tap</code> with a block:</p>
+
+
+<pre>
+    blah.sort.grep( /foo/ ).tap { |xs| p xs }.map { |x| x.blah }
+</pre> But like its sibling <code>.andand</code>, you can now call <code>.tap</code> with a method as well:
+
+<pre>
+    [1, 2, 3, 4, 5].tap.pop.map { |n| n * 2 }
+        =&gt; [2, 4, 6, 8]
+</pre>
+
+	<h3>Doctor, it hurts when I do that</h3>
+
+
+	<p><strong>Don&#8217;t do that!</strong></p>
+
+
+	<p>The popular use case for Object#tap is poor man&#8217;s debugging:</p>
+
+
+<pre>
+    blah.sort.grep( /foo/ ).tap { |xs| p xs }.map { |x| x.blah }
+</pre>Perhaps you want to remove the tap, you can delete it:
+
+<pre>
+    blah.sort.grep( /foo/ ).tap { |xs| p xs }.map { |x| x.blah }
+</pre>Or, you can change it to <code>.dont</code>:
+
+<pre>
+    blah.sort.grep( /foo/ ).dont { |xs| p xs }.map { |x| x.blah }
+</pre>Like <code>.andand</code> and <code>.tap</code>, <code>.dont</code> works with arbitrary methods, not just blocks:
+
+<pre>
+    (1..10).to_a.reverse!
+        =&gt; [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    (1..10).dont.to_a.reverse!
+        =&gt; [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre>
+
+	<h2>A little more background</h2>
+
+
+	<p><a href="http://weblog.raganwald.com/2008/01/objectandand-objectme-in-ruby.html">Object#andand &#38; Object#me in Ruby</a> explains the original motivations, as well as providing links to similar implementations you may want to consider. A few people have pointed out that Object#andand is similar to Haskell&#8217;s <code>Maybe</code> monad. <a href="http://blog.pretheory.com/arch/2008/02/the_maybe_monad_in_ruby.php">The Maybe Monad in Ruby</a> is a good introduction for Ruby programmers.</p>
+
+
+	<h2>How to submit patches</h2>
+
+
+	<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a>.</p>
+
+
+	<p>The trunk repository is <code>svn://rubyforge.org/var/svn/andand/trunk</code> for anonymous access.</p>
+
+
+	<h2>License</h2>
+
+
+	<p>This code is free to use under the terms of the <a href="http://en.wikipedia.org/wiki/MIT_License"><span class="caps">MIT</span> license</a>.</p>
+
+
+	<h2>Shout Out</h2>
+
+
+	<p><a href="http://mcommons.com/">Mobile Commons</a>. Huge.</p>
+
+
+	<h2>Contact</h2>
+
+
+	<p>Comments are welcome. Send an email to <a href="mailto:raganwald+rubyforge@gmail.com">Reginald Braithwaite</a>.</p>
+    <p class="coda">
+      <a href="http://weblog.raganwald.com">Reginald Braithwaite</a>, 15th February 2008<br>
+      Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
+    </p>
+</div>
+
+<!-- insert site tracking codes here, like Google Urchin -->
+
+</body>
+</html>
