@@ -6,6 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.register  '/register', :controller => 'peoples',     :action => 'create'
   map.signup    '/signup',   :controller => 'peoples',     :action => 'new'
+  map.reset_password '/reset_password', :controller => 'password_resets', :action => 'new', :conditions => {:method => :get}
+  
   
   map.resources :people
   map.resource  :session

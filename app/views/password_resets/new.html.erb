@@ -1,0 +1,7 @@
+<% form_tag(reset_password_url) do %>
+  <p>
+    <%= label_tag :email, "Email:" %>
+    <%= text_field_tag :email, params[:email] %>
+  </p>
+  <p><%= submit_tag "Submit" %></p>
+<% end -%>
