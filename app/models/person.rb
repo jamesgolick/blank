@@ -15,9 +15,16 @@ class Person < ActiveRecord::Base
 
   attr_accessible :email, :name, :password, :password_confirmation
 
-  def self.authenticate(email, password)
-    u = find_by_email(email) # need to get the salt
-    u && u.authenticated?(password) ? u : nil
+  class << self
+    def authenticate(email, password)
+      u = find_by_email(email) # need to get the salt
+      u && u.authenticated?(password) ? u : nil
+    end
+    
+    def find_by_valid_password_reset_code(code)
+      u = find_by_password_reset_code(code)
+      u.password_reset_code_expires.after?(Time.now) ? u : nil
+    end
   end
   
   def create_password_reset_code

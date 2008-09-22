@@ -104,4 +104,19 @@ class PersonTest < Test::Unit::TestCase
       assert people(:james).password_reset_code_expires.between?(@before, @after)
     end
   end
+  
+  context "Finding a person by password reset code" do
+    setup do
+      people(:james).create_password_reset_code
+    end
+
+    should "find a person whose code is valid" do
+      assert_equal people(:james), Person.find_by_valid_password_reset_code(people(:james).password_reset_code)
+    end
+    
+    should "not find a user whose password reset code is expired" do
+      people(:james).update_attribute :password_reset_code_expires, 1.week.ago
+      assert_nil Person.find_by_valid_password_reset_code(people(:james).password_reset_code)
+    end
+  end
 end
