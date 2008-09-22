@@ -9,9 +9,12 @@ class Blank < Thor
     
     puts "---- Cloning blank from #{BLANK_REPO}..."
     `git clone -o blank #{BLANK_REPO} #{name}`
+    run_in_project_dir 'cp .new_app.gitignore .gitignore'
+    run_in_project_dir 'git commit -a -m"Switch to gitignore that doesnt ignore site_keys.rb."'
     
     puts "\n---- Generating site keys for restful-auth..."
     run_in_project_dir 'rake auth:gen:site_key'
+    run_in_project_dir 'git add .; git commit -m"Add generated site_keys.rb file."'
     
     if repo
       puts "\n---- Pushing to repo @ #{repo}..."
