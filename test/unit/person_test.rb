@@ -119,4 +119,20 @@ class PersonTest < Test::Unit::TestCase
       assert_nil Person.find_by_valid_password_reset_code(people(:james).password_reset_code)
     end
   end
+  
+  context "Expiring a password reset code" do
+    setup do
+      people(:james).update_attribute :password_reset_code, 'asdf'
+      people(:james).update_attribute :password_reset_code_expires, 1.week.from_now
+      people(:james).expire_password_reset_code
+    end
+
+    should "remove the password reset code" do
+      assert_nil people(:james).password_reset_code
+    end
+    
+    should "remove the password reset code expiry" do
+      assert_nil people(:james).password_reset_code_expires
+    end
+  end
 end

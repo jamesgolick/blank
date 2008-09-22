@@ -32,4 +32,10 @@ class Person < ActiveRecord::Base
     self[:password_reset_code_expires] = 1.week.from_now
     save(false)
   end
+  
+  def expire_password_reset_code
+    self[:password_reset_code]         = nil
+    self[:password_reset_code_expires] = nil
+    save(false)
+  end
 end
