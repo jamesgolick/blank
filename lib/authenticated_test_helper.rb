@@ -32,5 +32,11 @@ module AuthenticatedTestHelper
         yield
       end
     end
+    
+    def should_deny_access
+      should_respond_with :redirect
+      should_redirect_to  'login_url'
+      should_set_the_flash_to(/must be logged in/i)
+    end
   end
 end
