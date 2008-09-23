@@ -21,6 +21,10 @@ class Blank < Thor
       puts "\n---- Pushing to repo @ #{repo}..."
       run_in_project_dir("git remote add origin #{repo}")
       run_in_project_dir("git push origin master")
+      run_in_project_dir("git fetch origin")
+      run_in_project_dir("git checkout origin/master")
+      run_in_project_dir("git branch --track -f master origin/master")
+      run_in_project_dir("git checkout master")
     end
     
     puts "\n---- There are TODOs in blank. Here's the output of rake notes, for your perusal:"
