@@ -13,6 +13,7 @@ Tools we use in nearly all of our apps are vendored, as is rails:
   - rake
   - restful_authentication
   - ruby-openid
+  - will_paginate
   
 == Installation
 
