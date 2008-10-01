@@ -24,16 +24,6 @@ module SecurityMacros
       end
     end
     
-    def on_subdomain(sd)
-      context "on subdomain #{sd}" do
-        setup do
-          subdomain sd
-        end
-    
-        yield
-      end
-    end
-    
     def not_logged_in
       context "not logged in" do
         setup do
