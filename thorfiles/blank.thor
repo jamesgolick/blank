@@ -10,12 +10,12 @@ class Blank < Thor
     puts "---- Cloning blank from #{BLANK_REPO}..."
     `git clone -o blank #{BLANK_REPO} #{name}`
     rake 'blank:switch_to_app_gitignore'
-    commit "Switch to gitignore that doesnt ignore site_keys.rb."
+    commit "Switch to gitignore that doesnt ignore site_keys.rb." if repo
     
     
     puts "\n---- Generating site keys for restful-auth..."
     rake 'auth:gen:site_key'
-    commit "Add generated site_keys.rb file."
+    commit "Add generated site_keys.rb file." if repo
     
     if repo
       puts "\n---- Pushing to repo @ #{repo}..."
@@ -24,7 +24,7 @@ class Blank < Thor
     
     puts "\n---- Generating a session configuration."
     rake "blank:session_config NAME=#{name}"
-    commit "Add generated session configuration."
+    commit "Add generated session configuration." if repo
     
     puts "\n---- There are TODOs in blank. Here's the output of rake notes, for your perusal:"
     puts rake(:notes)
