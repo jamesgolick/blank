@@ -1,4 +1,5 @@
 config/initializers/site_keys.rb
+config/session.rb
 *.sqlite3
 log/*.log
 tmp/**/*
