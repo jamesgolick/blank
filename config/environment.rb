@@ -32,7 +32,6 @@ Rails::Initializer.run do |config|
   config.gem "active_presenter"
   config.gem "andand"
   
-  config.gem 'markcatley-exception_notification', :lib => 'exception_notifier', :source => 'http://gems.github.com', :version => '>= 1.0.0'
   config.gem "mislav-will_paginate",              :lib => "will_paginate",      :source => "http://gems.github.com"
   config.gem "thoughtbot-shoulda",                :lib => "shoulda/rails",      :source => "http://gems.github.com"
   config.gem "giraffesoft-attribute_fu",          :lib => "attribute_fu",       :source => "http://gems.github.com"
