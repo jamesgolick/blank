@@ -28,7 +28,6 @@ Rails::Initializer.run do |config|
   
   # Blank's default dependencies
   config.gem "ruby-openid", :lib => "openid"
-  config.gem "resource_controller"
   config.gem "active_presenter"
   config.gem "andand"
   
