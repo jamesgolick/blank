@@ -1,7 +1,7 @@
 # module: blank
 
 class Blank < Thor
-  BLANK_REPO = 'git@github.com:giraffesoft/blank.git'
+  BLANK_REPO = 'git://github.com/giraffesoft/blank.git'
   
   desc "new_app NAME [REPO]", "Create a new blank app in directory NAME, and push it to REPO."
   def new_app(name, repo=nil)
