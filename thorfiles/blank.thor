@@ -22,8 +22,9 @@ class Blank < Thor
       rake 'blank:switch_origin', :repo => repo
     end
     
-    puts "\n---- Generating a cookie secret, please place this in your config/environment.rb file in place of the commented out secret:"
-    puts rake('secret')
+    puts "\n---- Generating a session configuration."
+    rake "blank:session_config NAME=#{name}"
+    commit "Add generated session configuration."
     
     puts "\n---- There are TODOs in blank. Here's the output of rake notes, for your perusal:"
     puts rake(:notes)
