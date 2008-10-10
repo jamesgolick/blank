@@ -23,8 +23,12 @@ class Blank < Thor
     end
     
     puts "\n---- Generating a session configuration."
-    rake "blank:session_config NAME=#{name}"
+    rake "blank:session_config", :name => name
     commit "Add generated session configuration." if repo
+    
+    puts "\n---- Loading db schema, and creating dbs."
+    rake "db:schema:load"
+    rake "db:test:prepare"
     
     puts "\n---- There are TODOs in blank. Here's the output of rake notes, for your perusal:"
     puts rake(:notes)
