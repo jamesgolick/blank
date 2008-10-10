@@ -56,15 +56,11 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
   config.time_zone = 'UTC'
 
-  # Your secret key for verifying cookie session data integrity.
-  # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
-  # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :session_key => '_blank_session',
-    # :secret      => '9fb3d149e899eb84a95b842e3994751d93b9b3c0a706657e8d715f3618f436a17744a69fd07bb327625aa2a1fe77adcbe35e8eba85658be2535291d528ebbc63'
-  }
-
+  session_config = RAILS_ROOT+'/config/session.rb'
+  File.exist?(session_config) ? load(session_config) : raise("You are missing your config/session.rb file. Please run rake blank:session_config.")
+  
+  config.action_controller.session = SESSION_CONFIG
+  
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
