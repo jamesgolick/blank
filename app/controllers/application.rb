@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include AuthenticatedSystem
+  include AuthenticatedSystem, HoptoadNotifier::Catcher
 
   helper :all
   before_filter :configure_mailers
