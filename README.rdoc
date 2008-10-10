@@ -32,7 +32,11 @@ Just install thor:
 
   $ thor blank:new_app the_name_of_my_app the_git_repo_it_will_live_in
   
-That's it! If we improve the thor file, all you have to do is run
+That's it! There are a few rake notes that will inform you about some places that you replace blank app with your app's name.
+
+Also, you need to go fill in your hoptoad api key in config/initializers/hoptoad.rb
+
+If we improve the thor file, all you have to do is run
 
   $ thor update blank
   
