@@ -9,7 +9,7 @@ Tools we use in nearly all of our apps are vendored, as is rails:
   - active_presenter
   - andand
   - attribute_fu
-  - exception_notification
+  - hoptoad
   - mocha
   - rake
   - restful_authentication
