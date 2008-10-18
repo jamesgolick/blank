@@ -9,7 +9,7 @@ class Blank < Thor
     
     puts "---- Cloning blank from #{BLANK_REPO}..."
     `git clone -o blank #{BLANK_REPO} #{name}`
-    `git checkout rails_rumble`
+    `cd #{name}; git checkout blank/rails_rumble`
     rake 'blank:switch_to_app_gitignore'
     commit "Switch to gitignore that doesnt ignore site_keys.rb." if repo
     
