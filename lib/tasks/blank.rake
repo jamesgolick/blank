@@ -1,7 +1,7 @@
 namespace :blank do
   task :switch_origin do
     `git remote add origin #{ENV['REPO']}`
-    `git push origin master`
+    `git push --force origin master`
     `git fetch origin`
     `git checkout origin/master`
     `git branch --track -f master origin/master`
