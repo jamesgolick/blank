@@ -38,7 +38,8 @@ Rails::Initializer.run do |config|
   config.gem "do_sqlite3", :version => "0.9.6"
   # config.gem "do_mysql", :version => "0.9.6"
   config.gem "dm-core", :version => "0.9.6"
-  
+  config.gem "dm-migrations", :version => "0.9.6"
+
   # Application-specific dependencies
   #config.gem ''
 
