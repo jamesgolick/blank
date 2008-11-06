@@ -34,6 +34,11 @@ Rails::Initializer.run do |config|
   config.gem "thoughtbot-shoulda",                :lib => "shoulda/rails",      :source => "http://gems.github.com"
   config.gem "giraffesoft-attribute_fu",          :lib => "attribute_fu",       :source => "http://gems.github.com"
   
+  # I use SQLite3 here, but if you need/want MySQL, be my guest
+  config.gem "do_sqlite3", :version => "0.9.6"
+  # config.gem "do_mysql", :version => "0.9.6"
+  config.gem "dm-core", :version => "0.9.6"
+  
   # Application-specific dependencies
   #config.gem ''
 
