@@ -16,9 +16,8 @@ Rails::Initializer.run do |config|
   # -- all .rb files in that directory are automatically loaded.
   # See Rails::Configuration for more options.
 
-  # Skip frameworks you're not going to use. To use Rails without a database
-  # you must remove the Active Record framework.
-  # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
+  # Skip ActiveRecord for real -- we're using DataMapper
+  config.frameworks -= [ :active_record ]
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
