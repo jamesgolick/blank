@@ -1,11 +1,18 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
-require 'test_help'
+
+# Make double-sure the RAILS_ENV is set to test,
+# so fixtures are loaded to the right database
+silence_warnings { RAILS_ENV = "test" }
+
+require 'test/unit'
+require 'active_support/test_case'
+require 'action_controller/test_case'
+require 'action_controller/test_process'
+require 'action_controller/integration'
+require 'action_mailer/test_case' if defined?(ActionMailer)
 
 class Test::Unit::TestCase
-  self.use_transactional_fixtures = true
-  self.use_instantiated_fixtures  = false
-  fixtures :all
   setup    :set_mailer_host
 
   include AuthenticatedTestHelper
