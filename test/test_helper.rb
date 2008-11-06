@@ -29,3 +29,6 @@ class Test::Unit::TestCase
       ActionMailer::Base.default_url_options[:host] = 'test.blankapp.com'
     end
 end
+
+Dir[File.join(Rails.root, "app", "models", "*")].each {|f| require f}
+DataMapper.auto_migrate!
