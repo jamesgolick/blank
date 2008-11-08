@@ -5,13 +5,15 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= controller.controller_name %>: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'reset-fonts-grids', 'application' %>
 </head>
-<body>
+<body id="doc2">
 
-<p style="color: green"><%= flash[:notice] %></p>
 
-<%= yield  %>
+<div>
+  <p style="color: green"><%= flash[:notice] %></p>
+  <%= yield  %>
+</div>
 
 </body>
 </html>

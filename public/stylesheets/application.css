@@ -1,0 +1,45 @@
+html {
+  background:#706e66;
+  color: #706e66;
+}
+
+#login {
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
+
+  background:white;
+
+  padding:25px;
+  width: 350px;
+}
+
+#login h1 {
+  margin-bottom:25px;
+  text-align: center;
+}
+
+#login input.field {
+  width: 331px;
+}
+
+form label {
+  display:block;
+  padding: 5px 0px;
+  font-weight:bold;
+}
+
+form label.remember_me { display:inline; }
+
+form p {
+  margin-bottom:10px;
+}
+
+form input.submit { float:right; }
+
+form input.field { 
+  padding: 5px;
+  font-size:14px; 
+}
+
+.clear { clear:both; }

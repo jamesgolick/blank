@@ -1,14 +1,17 @@
-<h1>Log In</h1>
+<div id="login">
+  <h1><%= image_tag 'blank_logo.png' %></h1>
 
-<% form_tag session_path do -%>
-<p><label for="login">Email</label><br/>
-<%= text_field_tag 'email', @email %></p>
+  <% form_tag session_path do -%>
+    <p><label for="login">Email:</label>
+      <%= text_field_tag 'email', @email, :class => 'field' %></p>
 
-<p><label for="password">Password</label><br/>
-<%= password_field_tag 'password', nil %></p>
+    <p><label for="password">Password:</label>
+      <%= password_field_tag 'password', nil, :class => 'field' %></p>
 
-<p><label for="remember_me">Remember me:</label>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+    <p><label for="remember_me" class="remember_me">Remember me:</label> <%= check_box_tag 'remember_me', '1', @remember_me %></p>
 
-<p><%= submit_tag 'Log in' %></p>
-<% end -%>
+    <p><%= submit_tag 'Log in', :class => 'submit' %></p>
+  <% end -%>
+
+  <div class="clear"></div>
+</div>
