@@ -1,0 +1,7 @@
+<div id="session_toolbar">
+  Logged in as <%= current_person.name %>. 
+  
+  <%= link_to "Account", edit_account_url %> | <%= link_to "Logout", logout_url, :method => :delete %>
+</div>
+
+<div class="clear"></div>
