@@ -3,7 +3,7 @@ html {
   color: #706e66;
 }
 
-#login {
+#sessions {
   margin-top: 150px;
   margin-left: auto;
   margin-right: auto;
@@ -14,12 +14,12 @@ html {
   width: 350px;
 }
 
-#login h1 {
+#sessions h1 {
   margin-bottom:25px;
   text-align: center;
 }
 
-#login input.field {
+#sessions input.field {
   width: 331px;
 }
 
@@ -41,5 +41,20 @@ form input.field {
   padding: 5px;
   font-size:14px; 
 }
+
+#flash div {
+  border:1px solid #D6D5CE;
+  color:white;
+  font-size:16px;
+  margin-bottom:25px;
+  padding:10px;
+  width:100%;
+}
+
+#flash .error {
+  background:#FF1400 none repeat scroll 0 0;
+}
+
+#sessions.content #flash div { width:325px; }
 
 .clear { clear:both; }

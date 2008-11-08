@@ -9,9 +9,15 @@
 </head>
 <body id="doc2">
 
+<div id="<%= controller.controller_name %>" class="content">
+  <div id="flash">
+    <% [:error, :notice].each do |flash_type| -%>
+      <% unless flash[flash_type].nil? -%>
+        <div class="<%= flash_type %>"><%= flash[flash_type] %></div>
+      <% end -%>
+    <% end -%>
+  </div>
 
-<div>
-  <p style="color: green"><%= flash[:notice] %></p>
   <%= yield  %>
 </div>
 
