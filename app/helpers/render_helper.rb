@@ -4,6 +4,6 @@ module RenderHelper
   end
 
   def render_session_toolbar
-    render :partial => 'shared/session_toolbar'
+    render :partial => 'shared/session_toolbar' if logged_in? && !controller.is_a?(SessionsController)
   end
 end
