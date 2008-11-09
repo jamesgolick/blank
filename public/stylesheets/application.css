@@ -13,9 +13,10 @@ html {
   border:1px solid #D6D5CE;
   color:white;
   font-size:16px;
+  margin-top:25px;
   margin-bottom:25px;
   padding:10px;
-  width:100%;
+  width:860px;
 }
 
 #flash .error {
