@@ -22,6 +22,10 @@ html {
   background:#FF1400 none repeat scroll 0 0;
 }
 
+#flash .notice {
+  background:#706e66;
+}
+
 #sessions {
   margin-top: 150px;
   margin-left: auto;
