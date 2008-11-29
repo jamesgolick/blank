@@ -10,7 +10,7 @@ class AccountsControllerTest < ActionController::TestCase
       resource.formats         = [:html]
       resource.klass           = Person
       resource.actions         = [:edit, :update]
-      resource.update.redirect = 'edit_account_url'
+      resource.update.redirect = 'account_url'
     end
   end
   
