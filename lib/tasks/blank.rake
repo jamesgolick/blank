@@ -13,7 +13,7 @@ namespace :blank do
   end
   
   task :session_config do
-    @secret = Rails::SecretKeyGenerator.new(ENV['ID']).generate_secret
+    @secret = ActiveSupport::SecureRandom.hex(64)
     @name   = ENV['NAME']
     
     result = ERB.new(File.read(File.dirname(__FILE__)+'/../templates/session.rb.erb')).result(binding)
@@ -21,4 +21,6 @@ namespace :blank do
       f << result
     end
   end
+
+  task :build => ['blank:session_config', 'auth:gen:site_key', :environment, 'db:migrate', :test]
 end
