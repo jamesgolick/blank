@@ -35,10 +35,20 @@ module SecurityMacros
       end
     end
     
+    # Asserts that access is denied, meaning the browser knows there's something
+    # there, and just needs the proper credentials
     def should_deny_access
       should_respond_with :redirect
       should_redirect_to  'login_url'
       should_set_the_flash_to(/must be logged in/i)
+    end
+
+    # Asserts that the response is a 404.
+    # This prevents an attacker from knowing that there's something at this location.
+    def should_block_access
+      should_respond_with :missing
+      should_render_template "404"
+      should_not_set_the_flash
     end
   end
 end
