@@ -15,6 +15,10 @@ class AccountsControllerTest < ActionController::TestCase
   end
   
   not_logged_in do
+    on :get, :edit, :id => lambda { @person.id } do
+      should_deny_access
+    end
+
     context "With valid password reset code" do
       setup do
         people(:james).create_password_reset_code
