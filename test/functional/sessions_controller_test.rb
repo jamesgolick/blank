@@ -52,6 +52,7 @@ class SessionsControllerTest < Test::Unit::TestCase
 
     should_respond_with :success
     should_render_template :new
+    should_set_the_flash_to /Couldn't log you in as 'whatever'/i
     should "not log in" do
       assert_nil session[:person_id]      
     end
