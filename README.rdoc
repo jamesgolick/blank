@@ -52,7 +52,13 @@ Your app will share a git history with blank. That means that when blank gets pa
 == Development
 
 All development will be done at the {github repo}[https://github.com/giraffesoft/blank/tree/master]. Fork away :)
+
+After cloning, to get tests passing:
   
+  $ rake blank:session_config
+  $ rake db:migrate
+  $ rake auth:gen:site_key
+
 == Credits
 
   Blank was created by {James Golick}[http://jamesgolick.com]. Its development is funded by GiraffeSoft Inc.
