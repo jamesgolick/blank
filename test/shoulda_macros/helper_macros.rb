@@ -2,11 +2,7 @@ module HelperMacros
   def self.included(klass)
     klass.class_eval do 
       extend  ClassMethods
-      include InstanceMethods
     end
-  end
-
-  module InstanceMethods
   end
 
   module ClassMethods
