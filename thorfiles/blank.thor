@@ -5,10 +5,12 @@ class Blank < Thor
   def new_app(name, repo=nil, branch="master")
     run "rails --template http://github.com/giraffesoft/blank/raw/templates/auth.rb #{name}"
     return unless repo
-    run "git remote add origin #{repo}"
-    run "git push origin #{branch}"
-    run "git config branch.master.remote origin"
-    run "git config branch.master.merge refs/heads/#{branch}"
+    Dir.chdir(name) do
+      run "git remote add origin #{repo}"
+      run "git push origin #{branch}"
+      run "git config branch.master.remote origin"
+      run "git config branch.master.merge refs/heads/#{branch}"
+    end
   end
 
   protected
