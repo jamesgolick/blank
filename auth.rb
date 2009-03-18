@@ -118,7 +118,7 @@ file "app/controllers/pages_controller.rb", %q(class PagesController < Applicati
   end
 end
 )
-file "app/views/layouts/application.html.erb", "<%= flash[:notice] %>\n<%= yield %>\n"
+file "app/views/layouts/application.html.erb", "<p class=\"success\">><%= flash[:success] %></p>\n<p class=\"notice\">><%= flash[:notice] %></p>\n<%= yield %>\n"
 
 git :init
 git :add => "."
