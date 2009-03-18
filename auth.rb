@@ -36,7 +36,7 @@ config.gem "thoughtbot-factory_girl", :source => "http://gems.github.com/", :lib
 
 # Cucumber, for feature testing
 config.gem "aslakhellesoy-cucumber", :lib => "cucumber", :source => "http://gems.github.com/"
-config.gem "brynary-webrat",         :lib => "webrat",   :source => "http://gems.github.com/"
+config.gem "webrat"
 
 # Cucumber dependencies
 config.gem "term-ansicolor", :lib => "term/ansicolor"
