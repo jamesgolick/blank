@@ -111,13 +111,14 @@ app
 
 route "map.root :controller => \"pages\", :action => \"show\", :page => \"home\""
 run "mkdir app/views/pages"
-file "app/views/pages/home.html.erb", "<h1>This is your home page</h1>\n<p><%= flash[:notice] %></p>\n"
+file "app/views/pages/home.html.erb", "<h1>This is your home page</h1>\n"
 file "app/controllers/pages_controller.rb", %q(class PagesController < ApplicationController
   def show
     render params[:page]
   end
 end
 )
+file "app/views/layouts/application.html.erb", "<%= flash[:notice] %>\n<%= yield %>\n"
 
 git :init
 git :add => "."
