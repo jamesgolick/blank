@@ -16,7 +16,7 @@ class PersonTest < ActiveSupport::TestCase
       @person = Person.new
     end
 
-    should_require_attributes :password, :password_confirmation
+    should_validate_presence_of :password, :password_confirmation
   end
 
   context "Given an existing person" do
