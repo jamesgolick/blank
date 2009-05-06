@@ -1,21 +1,40 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'people_controller'
 
-# Re-raise errors caught by the controller.
-class PeopleController; def rescue_action(e) raise e end; end
+class PeopleControllerTest < ActionController::TestCase
+  not_logged_in do
+    context "on GET to :new" do
+      setup do
+        get :new
+      end
 
-class PeopleControllerTest < Test::Unit::TestCase
-  def setup
-    @controller = PeopleController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-  
-  should_be_restful do |resource|
-    resource.formats         = [:html]
-    resource.actions         = [:create, :new]
-    resource.create.params   = hash_for_person
-    resource.create.redirect = 'people_url'
-    resource.create.flash    = /thanks/i
+      should_respond_with :success
+      should_render_template "new"
+      should_not_set_the_flash
+      should_render_a_form
+    end
+
+    context "on POST to :create with invalid attributes" do
+      setup do
+        post :create, :person => Factory.attributes_for(:person, :password_confirmation => "not the same password")
+      end
+
+      should_respond_with :success
+      should_render_template "new"
+      should_not_set_the_flash
+      should_render_a_form
+    end
+
+    context "on POST to :create with valid attributes" do
+      setup do
+        post :create, :person => Factory.attributes_for(:person)
+      end
+
+      should_redirect_to("the homepage") { root_url }
+      should_set_the_flash_to /thanks/i
+      should "authenticate the new person" do
+        assert_not_nil session[:person_id]
+      end
+    end
   end
 end
