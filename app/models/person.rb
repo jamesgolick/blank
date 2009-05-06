@@ -23,7 +23,7 @@ class Person < ActiveRecord::Base
     
     def find_by_valid_password_reset_code(code)
       u = find_by_password_reset_code(code)
-      u.andand.password_reset_code_expires.andand.after?(Time.now) ? u : nil
+      u && u.password_reset_code_expires && u.password_reset_code_expires.after?(Time.now) ? u : nil
     end
   end
   

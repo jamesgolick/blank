@@ -2,16 +2,13 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
-  fixtures :all
-  setup    :set_mailer_host
+
+  setup :set_mailer_host
 
   include AuthenticatedTestHelper
-  extend  TestDataFactory
-  
-  data_factory :person, :email => 'gob@giraffesoft.ca', :password => 'illusions', :password_confirmation => 'illusions'
   
   protected
     def current_person
