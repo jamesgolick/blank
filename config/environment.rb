@@ -32,7 +32,6 @@ Rails::Initializer.run do |config|
   config.gem "andand"
   
   config.gem "mislav-will_paginate",              :lib => "will_paginate",      :source => "http://gems.github.com"
-  config.gem "thoughtbot-shoulda",                :lib => "shoulda/rails",      :source => "http://gems.github.com"
   config.gem "giraffesoft-attribute_fu",          :lib => "attribute_fu",       :source => "http://gems.github.com"
   
   # Application-specific dependencies
