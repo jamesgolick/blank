@@ -8,10 +8,10 @@ class Person < ActiveRecord::Base
   validates_format_of       :name,     :with => RE_NAME_OK,  :message => MSG_NAME_BAD, :allow_nil => true
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :email
-  validates_length_of       :email,    :within => 6..100 #r@a.wk
-  validates_uniqueness_of   :email,    :case_sensitive => false
-  validates_format_of       :email,    :with => RE_EMAIL_OK, :message => MSG_EMAIL_BAD
+  validates_presence_of     :email,    :if => :email_required?
+  validates_length_of       :email,    :if => :email_required?, :within => 6..100 #r@a.wk
+  validates_format_of       :email,    :if => :email_required?, :with => RE_EMAIL_OK, :message => MSG_EMAIL_BAD
+  validates_uniqueness_of   :email,    :case_sensitive => false, :allow_nil => true
 
   validates_uniqueness_of   :open_id_url, :if => :open_id_url?
   validate                  :validate_open_id_url_authentication, :if => :open_id_url?
@@ -52,5 +52,13 @@ class Person < ActiveRecord::Base
   protected
   def validate_open_id_url_authentication
     errors.add(:open_id_url, open_id_url_message) if new_record? && !open_id_url_authenticated?
+  end
+
+  def password_required?
+    !open_id_url?
+  end
+
+  def email_required?
+    !open_id_url?
   end
 end

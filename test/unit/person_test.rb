@@ -178,4 +178,16 @@ class PersonTest < ActiveSupport::TestCase
       assert_match /you suck/i, [@person.errors.on(:open_id_url)].flatten.to_sentence
     end
   end
+
+  context "An unauthenticated person using OpenID" do
+    setup do
+      @person = Person.new(:open_id_url => 'http://some.openid.provider.net')
+      @person.open_id_url_message       = "you rock"
+      @person.open_id_url_authenticated = true
+    end
+
+    should "be valid" do
+      assert_valid @person
+    end
+  end
 end
