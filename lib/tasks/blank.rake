@@ -1,11 +1,11 @@
 namespace :blank do
   task :switch_origin do
-    `git remote add origin #{ENV['REPO']}`
-    `git push origin master`
-    `git fetch origin`
-    `git checkout origin/master`
-    `git branch --track -f master origin/master`
-    `git checkout master`
+    sh "git remote add origin #{ENV['REPO']}"
+    sh "git push origin master"
+    sh "git fetch origin"
+    sh "git checkout origin/master"
+    sh "git branch --track -f master origin/master"
+    sh "git checkout master"
   end
   
   task :switch_to_app_gitignore do
