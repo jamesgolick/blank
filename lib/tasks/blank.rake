@@ -22,5 +22,9 @@ namespace :blank do
     end
   end
 
-  task :build => ['blank:session_config', 'auth:gen:site_key', 'gems:install', 'db:migrate', :test]
+  task :prepare_test_env do
+    sh "rake RAILS_ENV=test gems:install"
+  end
+
+  task :build => ['blank:session_config', 'auth:gen:site_key', 'gems:install', 'db:migrate', 'blank:prepare_test_env', :test]
 end
