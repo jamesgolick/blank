@@ -99,7 +99,7 @@ Then /^I should not see "([^\"]*)"$/ do |text|
 end
 
 Then /^the "([^\"]*)" field should be empty$/ do |field|
-  field_labeled(field).value.should == ""
+  field_labeled(field).value.to_s.should == ""
 end
 
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
