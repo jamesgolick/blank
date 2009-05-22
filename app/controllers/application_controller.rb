@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def home
-    render :text => "Welcome! (in application.rb / home)"
+    render :text => "Welcome! (in application.rb / home)", :layout => "application"
   end
   
   protected
