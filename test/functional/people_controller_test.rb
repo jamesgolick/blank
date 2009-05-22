@@ -36,7 +36,20 @@ class PeopleControllerTest < ActionController::TestCase
       end
     end
 
-    context "Signing up with a valid OpenID" do
+    context "Signing up with a valid OpenID and no parameters" do
+      setup do
+        stub_open_id(true, 'you rock')
+        post :signup_with_open_id, :openid_url => 'http://jamesgolick.com'
+      end
+
+      should "create a person and associate the OpenID URL with that person" do
+        assert_not_nil Person.find_by_open_id_url('http://jamesgolick.com')
+      end
+
+      should_redirect_to("the homepage") { root_url }
+    end
+
+    context "Signing up with a valid OpenID and full parameters" do
       setup do
         stub_open_id(true, 'you rock')
         post :signup_with_open_id, :openid_url => 'http://jamesgolick.com', :person => {:email => "james@giraffesoft.ca", :name => "james", :password => "monkey", :password_confirmation => "monkey"}
@@ -47,6 +60,18 @@ class PeopleControllerTest < ActionController::TestCase
       end
 
       should_redirect_to("the homepage") { root_url }
+
+      should "set the name" do
+        assert_equal "james", assigns(:person).name
+      end
+
+      should "set the email" do
+        assert_equal "james@giraffesoft.ca", assigns(:person).email
+      end
+
+      should "set the password" do
+        assert_equal assigns(:person), Person.authenticate("james@giraffesoft.ca", "monkey")
+      end
     end
 
     context "When signing up with an invalid openid url" do
