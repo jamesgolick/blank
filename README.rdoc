@@ -64,6 +64,32 @@ If you want to deploy to Heroku, there's a built-in Rake task to generate Heroku
 
 This task will create or update <tt>.gems</tt> with new dependencies coming from config/environment.rb.  The task will also commit the changes to your repository.
 
+== JRuby
+
+Using JRuby 1.2, I was able to successfully run the functional tests with this in my config/database.yml:
+
+  # If you use SQLite3 under JRuby, use these blocks instead
+  development:
+    adapter: jdbcsqlite3
+    database: db/development.sqlite3
+
+  test:
+    adapter: jdbcsqlite3
+    database: db/test.sqlite3
+
+Of course, you'll need the proper gems installed:
+
+  $ jruby -S gem install activerecord activerecord-jdbc-adapter activerecord-jdbcsqlite3-adapter jdbc-sqlite3
+
+I had the following versions installed:
+
+* activerecord (2.3.2)
+* activerecord-jdbc-adapter (0.9.1)
+* activerecord-jdbcsqlite3-adapter (0.9.1)
+* jdbc-sqlite3 (3.6.3.054)
+
+I said "functional tests" above because there were some minor unit test failures as well as integration test failures.  These aren't show stoppers though.
+
 == Credits
 
 Blank was created by {James Golick}[http://jamesgolick.com]. Its development is funded by GiraffeSoft Inc.
