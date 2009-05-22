@@ -117,3 +117,14 @@ end
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
 end
+
+Then /^I should be redirected to "([^\"]*)"$/ do |url|
+  raise ArgumentError, "Cannot verify a URL that has a query parameter: received #{url.inspect}" if url["?"]
+  expected = URI.parse(url)
+  actual   = URI.parse(response.headers["Location"])
+
+  # We don't compare the query strings, as they change everytime
+  expected.query = actual.query = ""
+
+  expected.should == actual
+end

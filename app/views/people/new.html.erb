@@ -3,6 +3,7 @@
 
 <%= error_messages_for :person %>
 <% form_for :person, :url => people_path do |f| -%>
+  <h3>The good old fashioned way</h3>
 <p><%= f.label :email %><br/>
 <%= f.text_field :email %></p>
 
@@ -14,3 +15,10 @@
 
 <p><%= submit_tag 'Sign up' %></p>
 <% end -%>
+
+<% form_tag(signup_with_open_id_people_url, :method => :post) do %>
+  <h3>Using OpenID</h3>
+  <p><%= label_tag :openid_url, "Open ID URL" %><br/>
+    <%= text_field_tag :openid_url %></p>
+  <p><%= submit_tag "Sign up with OpenID" %></p>
+<% end %>

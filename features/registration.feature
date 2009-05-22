@@ -42,3 +42,9 @@ So that actions on the site aren't anonymous
     And the "Email" field should contain "frodo@baggins.net"
     And the "Password" field should be empty
     And the "Confirm password" field should be empty
+
+  Scenario: Using OpenID
+    Given I am on the signup page
+    And I fill in "openid_url" with "http://frodo.myopenid.com"
+    And I press "Sign up with OpenID"
+    Then I should be redirected to "http://www.myopenid.com/server"
