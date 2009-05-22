@@ -39,7 +39,7 @@ module SecurityMacros
     # there, and just needs the proper credentials
     def should_deny_access
       should_respond_with :redirect
-      should_redirect_to  'login_url'
+      should_redirect_to("the login page") { login_url }
       should_set_the_flash_to(/must be logged in/i)
     end
 
