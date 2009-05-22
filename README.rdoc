@@ -56,6 +56,14 @@ After cloning, to get tests passing:
   
   $ rake blank:build
 
+== Deployment
+
+If you want to deploy to Heroku, there's a built-in Rake task to generate Heroku's <tt>.gems</tt> file:
+
+  $ rake heroku:gems
+
+This task will create or update <tt>.gems</tt> with new dependencies coming from config/environment.rb.  The task will also commit the changes to your repository.
+
 == Credits
 
 Blank was created by {James Golick}[http://jamesgolick.com]. Its development is funded by GiraffeSoft Inc.
