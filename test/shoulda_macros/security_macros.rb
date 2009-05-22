@@ -13,17 +13,6 @@ module SecurityMacros
   end
   
   module ClassMethods
-    def logged_in_as(person)
-      context "logged in as #{person}" do
-        setup do
-          # Restful Auth's login_as test helper
-          login_as person
-        end
-        
-        yield
-      end
-    end
-    
     def not_logged_in
       context "not logged in" do
         setup do
