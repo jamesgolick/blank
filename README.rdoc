@@ -2,7 +2,7 @@
 
 Blank is GiraffeSoft's starter Rails application.
 
-It makes heavy use of our standard toolset. Controllers are mostly written using <tt>ResourceController</tt>, and it is tested entirely with Thoughtbot's <tt>Shoulda</tt>.
+It makes heavy use of our standard toolset. Controllers are mostly written using <tt>ResourceController</tt>, and it is tested entirely with Thoughtbot's <tt>Shoulda</tt>.  Integration testing is taken care of by <tt>Cucumber</tt>.
 
 Tools we use in nearly all of our applications are vendored, as is Rails:
 
