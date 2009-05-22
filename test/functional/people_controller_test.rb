@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'people_controller'
 
 class PeopleControllerTest < ActionController::TestCase
   not_logged_in do
