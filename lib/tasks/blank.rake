@@ -9,7 +9,7 @@ namespace :blank do
   end
   
   task :switch_to_app_gitignore do
-    `cp .new_app.gitignore .gitignore`
+    cp ".new_app.gitignore", ".gitignore"
   end
   
   task :session_config do
