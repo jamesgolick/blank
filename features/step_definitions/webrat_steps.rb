@@ -98,6 +98,10 @@ Then /^I should not see "([^\"]*)"$/ do |text|
   response.should_not contain(text)
 end
 
+Then /^the "([^\"]*)" field should be empty$/ do |field|
+  field_labeled(field).value.should == ""
+end
+
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
   field_labeled(field).value.should =~ /#{value}/
 end
