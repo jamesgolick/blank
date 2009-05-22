@@ -22,5 +22,5 @@ namespace :blank do
     end
   end
 
-  task :build => ['blank:session_config', 'auth:gen:site_key', :environment, 'db:migrate', :test]
+  task :build => ['blank:session_config', 'auth:gen:site_key', 'gems:install', 'db:migrate', :test]
 end
