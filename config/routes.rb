@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect '/account', :controller => 'accounts', :action => 'edit'
   
-  map.resources :people
-  map.resource  :session, :account
+  map.resource  :account
+  map.resources :people,  :collection => {:signup_with_open_id => :any}
+  map.resource  :session, :member => {:create_with_open_id => :any}
 end

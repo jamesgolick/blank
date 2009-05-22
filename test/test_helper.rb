@@ -18,4 +18,8 @@ class ActiveSupport::TestCase
     def set_mailer_host
       ActionMailer::Base.default_url_options[:host] = 'test.blankapp.com'
     end
+
+    def stub_open_id(success, message, url = 'http://jamesgolick.com')
+      @controller.stubs(:authenticate_with_open_id).yields(stub(:successful? => success, :message => message), url)
+    end
 end

@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080922172907) do
+ActiveRecord::Schema.define(:version => 20081019180856) do
+
+  create_table "open_id_authentication_associations", :force => true do |t|
+    t.integer "issued"
+    t.integer "lifetime"
+    t.string  "handle"
+    t.string  "assoc_type"
+    t.binary  "server_url"
+    t.binary  "secret"
+  end
+
+  create_table "open_id_authentication_nonces", :force => true do |t|
+    t.integer "timestamp",  :null => false
+    t.string  "server_url"
+    t.string  "salt",       :null => false
+  end
 
   create_table "people", :force => true do |t|
     t.string   "name",                        :limit => 100, :default => ""
@@ -22,6 +37,10 @@ ActiveRecord::Schema.define(:version => 20080922172907) do
     t.datetime "remember_token_expires_at"
     t.string   "password_reset_code"
     t.datetime "password_reset_code_expires"
+    t.string   "open_id_url"
   end
+
+  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["open_id_url"], :name => "index_people_on_open_id_url", :unique => true
 
 end

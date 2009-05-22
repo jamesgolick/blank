@@ -5,18 +5,26 @@ class PersonTest < ActiveSupport::TestCase
     should "set remember_token" do
       assert_not_nil @person.remember_token      
     end
-    
+
     should "set remember_token_expires_at" do
       assert_not_nil @person.remember_token_expires_at      
     end
   end
-  
+
   context "With a new person" do
     setup do
       @person = Person.new
     end
 
     should_validate_presence_of :password, :password_confirmation
+  end
+
+  context "Given a person using OpenID" do
+    setup do
+      @person = Factory(:person_with_open_id)
+    end
+
+    should_validate_uniqueness_of :open_id_url
   end
 
   context "Given an existing person" do
@@ -152,6 +160,22 @@ class PersonTest < ActiveSupport::TestCase
       should "remove the password reset code expiry" do
         assert_nil @person.password_reset_code_expires
       end
+    end
+  end
+
+  context "An unauthenticated person using OpenID" do
+    setup do
+      @person = Person.new(:open_id_url => 'http://some.openid.provider.net')
+      @person.open_id_url_message = "you suck"
+      @person.save
+    end
+
+    should "NOT save" do
+      assert @person.new_record?
+    end
+
+    should "have errors on open_id_url matching the open_id_url_message" do
+      assert_match /you suck/i, [@person.errors.on(:open_id_url)].flatten.to_sentence
     end
   end
 end
