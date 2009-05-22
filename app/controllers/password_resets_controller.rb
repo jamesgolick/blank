@@ -6,6 +6,7 @@ class PasswordResetsController < ApplicationController
       flash.now[:notice] = "Sorry, we cannot find a user by that email address. Please check your entry and try again."
       render :action => "new"
     else
+      @person.create_password_reset_code
       flash.now[:notice] = "We've sent you an email with instructions on how to reset your password."
     end
   end
