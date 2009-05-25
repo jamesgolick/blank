@@ -1,6 +1,7 @@
 <h1>Log In</h1>
 
 <% form_tag session_path do -%>
+  <h3>The good old fashioned way</h3>
 <p><label for="login">Email</label><br/>
 <%= text_field_tag 'email', @email %></p>
 
@@ -12,3 +13,10 @@
 
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>
+
+<% form_tag create_with_open_id_session_path do %>
+  <h3>Using OpenID</h3>
+  <p><%= label_tag :openid_url, "Open ID URL" %><br/>
+    <%= text_field_tag :openid_url %></p>
+  <p><%= submit_tag "Login with OpenID" %></p>
+<% end %>
