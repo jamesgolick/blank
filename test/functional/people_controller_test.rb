@@ -11,6 +11,22 @@ class PeopleControllerTest < ActionController::TestCase
       should_render_template "new"
       should_not_set_the_flash
       should_render_a_form
+
+      should "have good old fashioned way of login in" do
+        assert_form people_path, :post do
+          assert_text_field     :person, :email
+          assert_password_field :person, :password
+          assert_password_field :person, :password_confirmation
+          assert_submit
+        end
+      end
+
+      should "have OpenID field for login in" do
+        assert_form signup_with_open_id_people_url, :post do
+          assert_text_field :openid_url
+          assert_submit
+        end
+      end
     end
 
     context "on POST to :create with invalid attributes" do
