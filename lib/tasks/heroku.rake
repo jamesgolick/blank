@@ -27,6 +27,15 @@ namespace :heroku do
     end
 
     sh "git add .gems"
-    sh "git commit -m \"Updated .gems dependencies for Heroku, in the #{Rails.env} environment\" .gems"
+    result = `git status`
+    case $?.exitstatus
+    when 0
+      sh "git commit -m \"Updated .gems dependencies for Heroku, in the #{Rails.env} environment\" .gems"
+    when 1
+      # NOP, clean directory
+    else
+      puts result
+      exit $?.exitstatus
+    end
   end
 end
