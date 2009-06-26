@@ -38,4 +38,11 @@ namespace :heroku do
       exit $?.exitstatus
     end
   end
+
+  desc "Deploys the application to Heroku.  Creates a new Heroku application if needed."
+  task :deploy => %w(heroku:gems) do
+    remotes = `git remote -v`.split("\n")
+    sh "heroku create" if remotes.grep(/heroku/i).empty?
+    sh "git push heroku master"
+  end
 end
